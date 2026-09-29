@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "StreamTutor — German Video Immersion & Flashcards",
+  "version": "0.1.0",
+  "description": "Learn German while watching shows and movies. CEFR-aware subtitle assistance, Yomitan-style 1-click word lookup, and instant flashcard export.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "*://primevideo.com/*",
+    "*://*.primevideo.com/*",
+    "*://amazon.de/*",
+    "*://*.amazon.de/*",
+    "*://amazon.com/*",
+    "*://*.amazon.com/*",
+    "*://amazon.co.uk/*",
+    "*://*.amazon.co.uk/*",
+    "*://netflix.com/*",
+    "*://*.netflix.com/*",
+    "*://localhost/*",
+    "*://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "StreamTutor (German Immersion)"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://primevideo.com/*",
+        "*://*.primevideo.com/*",
+        "*://amazon.de/*",
+        "*://*.amazon.de/*",
+        "*://amazon.com/*",
+        "*://*.amazon.com/*",
+        "*://amazon.co.uk/*",
+        "*://*.amazon.co.uk/*",
+        "*://localhost/*",
+        "*://127.0.0.1/*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content.css",
+        "test-page.html"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

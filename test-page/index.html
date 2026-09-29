@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>German Stream Tutor - Local Video Test Environment</title>
+  <link rel="stylesheet" href="content.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #090d16;
+      color: #f1f5f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge {
+      font-size: 12px;
+      background: #0284c7;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    p {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+    /* Simulated Amazon Prime Player Container */
+    #dv-web-player {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      background: #000000;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    }
+    .video-canvas-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #1e1b4b 0%, #030712 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      user-select: none;
+    }
+    .video-canvas-backdrop .anime-art {
+      font-size: 64px;
+      margin-bottom: 12px;
+    }
+    /* Native Amazon Captions Simulation */
+    .atvwebplayersdk-captions-text {
+      position: absolute;
+      bottom: 40px;
+      max-width: 80%;
+      text-align: center;
+      font-size: 22px;
+      font-weight: 600;
+      color: #ffffff;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 6px 16px;
+      border-radius: 6px;
+      z-index: 10;
+      min-height: 24px;
+      line-height: 1.4;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+      transition: opacity 0.2s ease;
+    }
+    .controls-panel {
+      margin-top: 24px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 10px;
+      padding: 20px;
+    }
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      background: #1f2937;
+      color: #f3f4f6;
+      border: 1px solid #374151;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn:hover {
+      background: #374151;
+      border-color: #4b5563;
+    }
+    .btn-b1 {
+      border-left: 4px solid #f59e0b;
+    }
+    .btn-a1 {
+      border-left: 4px solid #10b981;
+    }
+    .btn-action {
+      background: #2563eb;
+      border-color: #3b82f6;
+    }
+    .btn-action:hover {
+      background: #1d4ed8;
+    }
+    .btn-danger {
+      background: #991b1b;
+      border-color: #b91c1c;
+    }
+    .status-box {
+      background: #030712;
+      border: 1px solid #1f2937;
+      border-radius: 6px;
+      padding: 12px;
+      font-family: ui-monospace, SFMono-Regular, monospace;
+      font-size: 13px;
+      color: #38bdf8;
+    }
+    .instructions {
+      margin-top: 20px;
+      padding: 16px;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 8px;
+      border-left: 4px solid #38bdf8;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .instructions code {
+      background: #0f172a;
+      padding: 2px 5px;
+      border-radius: 3px;
+      color: #fde047;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>
+      🎬 StreamTutor: Video Immersion Sandbox
+      <span class="badge">Prime Video & Web Simulator</span>
+    </h1>
+    <p>Simulates the exact DOM structure and subtitle caption emission of streaming players (<code>#dv-web-player</code> and <code>.atvwebplayersdk-captions-text</code>).</p>
+
+    <!-- Simulated Prime Player -->
+    <div id="dv-web-player">
+      <div class="video-canvas-backdrop">
+        <div class="anime-art">🎬 🍿 📺</div>
+        <div>German Streaming Video Playback Simulation</div>
+        <div style="font-size: 12px; margin-top: 4px;">Simulated Video Playback Area</div>
+      </div>
+      <!-- Dummy HTML5 video element for DOM binding -->
+      <video id="simulated-video" style="display:none;"></video>
+      <!-- Amazon Prime Native Caption DOM node -->
+      <div class="atvwebplayersdk-captions-text" id="fake-captions"></div>
+    </div>
+
+    <!-- Test Controls -->
+    <div class="controls-panel">
+      <div style="font-weight: 600; margin-bottom: 10px; color: #e2e8f0;">Trigger Dialogue Subtitles:</div>
+      <div class="button-group">
+        <button class="btn btn-b1" onclick="setSubtitle('Du weißt doch überhaupt nicht, wovon du redest.', 'B1')">
+          Sentence 1 (B1): "Du weißt doch überhaupt nicht, wovon du redest."
+        </button>
+        <button class="btn btn-a1" onclick="setSubtitle('Das ist mein Ninja-Weg!', 'A1')">
+          Sentence 2 (A1): "Das ist mein Ninja-Weg!" (Untouched by default)
+        </button>
+        <button class="btn btn-b1" onclick="setSubtitle('Obwohl ich schwach bin, gebe ich niemals auf.', 'B1')">
+          Sentence 3 (B1): "Obwohl ich schwach bin, gebe ich niemals auf."
+        </button>
+        <button class="btn btn-a1" onclick="setSubtitle('Ich werde der nächste Hokage, verlass dich drauf!', 'A2')">
+          Sentence 4 (A2): "Ich werde der nächste Hokage, verlass dich drauf!"
+        </button>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-action" id="cycle-btn" onclick="toggleAutoPlay()">
+          ▶ Start Episode Auto-Play Simulation
+        </button>
+        <button class="btn btn-danger" onclick="setSubtitle('')">
+          ✕ Clear Subtitle
+        </button>
+      </div>
+
+      <div class="status-box" id="status-display">
+        Current DOM Caption: (empty)
+      </div>
+    </div>
+
+    <div class="instructions">
+      <strong>How to test:</strong>
+      <ol style="margin-top: 6px; padding-left: 20px;">
+        <li>Ensure the backend is running at <code>http://localhost:8000</code>.</li>
+        <li>Load the unpacked extension directory (<code>extension/dist</code>) in <code>chrome://extensions</code>.</li>
+        <li>Click <strong>Sentence 1 (B1)</strong>: the German Stream Tutor overlay appears with translation, CEFR badge <code>[B1]</code>, and grammar note.</li>
+        <li>Click <strong>Sentence 2 (A1)</strong> or <strong>Sentence 4 (A2)</strong>: the overlay automatically stays hidden because the default threshold is <strong>B1+</strong> (A1/A2 are left untouched so learning is unobtrusive).</li>
+        <li>To see assistance on A1 or A2 sentences as well, change the <strong>Help</strong> dropdown in the overlay to <strong>A2+</strong> or <strong>A1+ (All)</strong>!</li>
+        <li>Click <strong>Sentence 3 (B1)</strong>: overlay appears with subordinate clause breakdown (*"obwohl"*).</li>
+        <li><strong>Mark Any Word (Yomitan-style)</strong>: Click on <em>any</em> individual word in the German subtitle (e.g. <code>wovon</code>, <code>überhaupt</code>, <code>schwach</code>, <code>redest</code>). The word glows in amber, and a floating tooltip appears with the word definition and a <strong>[➕ Save Flashcard]</strong> button.</li>
+        <li><strong>1-Click Save to File</strong>: Click <strong>[➕ Save Flashcard]</strong> or <strong>[💾 Sentence]</strong>. The card is instantly appended to <code>backend/data/saved_flashcards.csv</code> and ready to import into your <strong>Wortlaut</strong> app or Anki!</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    const captionsEl = document.getElementById('fake-captions');
+    const statusEl = document.getElementById('status-display');
+    const cycleBtn = document.getElementById('cycle-btn');
+
+    const EPISODE_SUBTITLES = [
+      { text: "Du weißt doch überhaupt nicht, wovon du redest.", level: "B1" },
+      { text: "Das ist mein Ninja-Weg!", level: "A1" },
+      { text: "Obwohl ich schwach bin, gebe ich niemals auf.", level: "B1" },
+      { text: "Ich werde der nächste Hokage, verlass dich drauf!", level: "A2" },
+      { text: "Wenn du dich nicht zusammenreißt, werden wir alle sterben.", level: "B2" }
+    ];
+
+    let autoPlayTimer = null;
+    let autoPlayIndex = 0;
+
+    function setSubtitle(text, expectedLevel) {
+      captionsEl.textContent = text;
+      let status = 'Current DOM Caption: ' + (text ? '"' + text + '"' : '(empty)');
+      if (text && expectedLevel) {
+        if (expectedLevel === 'A1' || expectedLevel === 'A2') {
+          status += ' ➔ [' + expectedLevel + '] Below B1+ threshold: overlay intentionally stays hidden (untouched). Switch dropdown to A2+ or A1+ to show help!';
+        } else {
+          status += ' ➔ [' + expectedLevel + '] Meets B1+ threshold: tutor overlay appears with translation & grammar notes.';
+        }
+      }
+      statusEl.textContent = status;
+      console.log('[TestPage] Set caption to:', text);
+    }
+
+    function toggleAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
+        cycleBtn.textContent = '▶ Start Episode Auto-Play Simulation';
+        cycleBtn.className = 'btn btn-action';
+      } else {
+        cycleBtn.textContent = '⏹ Stop Episode Auto-Play';
+        cycleBtn.className = 'btn btn-danger';
+        const item = EPISODE_SUBTITLES[autoPlayIndex];
+        setSubtitle(item.text, item.level);
+        autoPlayTimer = setInterval(() => {
+          autoPlayIndex = (autoPlayIndex + 1) % EPISODE_SUBTITLES.length;
+          const current = EPISODE_SUBTITLES[autoPlayIndex];
+          setSubtitle(current.text, current.level);
+        }, 4000);
+      }
+    }
+
+    // Automated test helper for headless browser verification & screenshots
+    const urlParams = new URLSearchParams(window.location.search);
+    const testMode = urlParams.get('test');
+    if (testMode === 'sentence1') {
+      setTimeout(() => {
+        setSubtitle("Du weißt doch überhaupt nicht, wovon du redest.", "B1");
+      }, 400);
+    } else if (testMode === 'click_wovon') {
+      setTimeout(() => {
+        setSubtitle("Du weißt doch überhaupt nicht, wovon du redest.", "B1");
+        setTimeout(() => {
+          const w = document.querySelector('.gst-word[data-word="wovon"]');
+          if (w) w.click();
+        }, 1200);
+      }, 400);
+    } else if (testMode === 'click_and_save') {
+      setTimeout(() => {
+        setSubtitle("Du weißt doch überhaupt nicht, wovon du redest.", "B1");
+        setTimeout(() => {
+          const w = document.querySelector('.gst-word[data-word="wovon"]');
+          if (w) w.click();
+          setTimeout(() => {
+            const saveBtn = document.getElementById('gst-popover-save-btn');
+            if (saveBtn) saveBtn.click();
+          }, 800);
+        }, 1200);
+      }, 400);
+    }
+  </script>
+  <script src="content.js"></script>
+</body>
+</html>

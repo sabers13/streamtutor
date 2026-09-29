@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>German Stream Tutor</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <div class="header-title">
+        <span class="logo-icon">🥋</span>
+        <h2>Deutsch Tutor</h2>
+      </div>
+      <span class="version-tag">v0.1.0</span>
+    </div>
+
+    <div class="popup-section toggle-section">
+      <div class="section-label">
+        <strong>Tutor Overlay</strong>
+        <span class="subtext">Auto-detect German subtitles</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="tutor-enabled" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+
+    <div class="popup-section">
+      <label for="threshold-select"><strong>Assistance Threshold</strong></label>
+      <div class="subtext">Show translation & notes for sentences at or above:</div>
+      <select id="threshold-select" class="form-select">
+        <option value="A1">A1+ (Show help on all sentences)</option>
+        <option value="A2">A2+ (Help with almost everything)</option>
+        <option value="B1" selected>B1+ (Recommended for A2 learner)</option>
+        <option value="B2">B2+ (Only advanced grammar)</option>
+        <option value="C1">C1+ (Only mastery level)</option>
+      </select>
+    </div>
+
+    <div class="popup-section">
+      <label for="user-level-select"><strong>Your Current Level</strong></label>
+      <select id="user-level-select" class="form-select">
+        <option value="A1">A1 - Beginner</option>
+        <option value="A2" selected>A2 - Elementary</option>
+        <option value="B1">B1 - Intermediate</option>
+        <option value="B2">B2 - Upper Intermediate</option>
+      </select>
+    </div>
+
+    <div class="popup-section">
+      <label for="position-select"><strong>Screen Position & Layout</strong></label>
+      <div class="subtext">Move overlay to top, bottom, or vertical sidebar:</div>
+      <select id="position-select" class="form-select">
+        <option value="bottom">⬇ Bottom (Horizontal)</option>
+        <option value="top">⬆ Top (Horizontal)</option>
+        <option value="left">⬅ Left (Vertical Sidebar)</option>
+        <option value="right">➡ Right (Vertical Sidebar)</option>
+      </select>
+    </div>
+
+    <div class="popup-section backend-section">
+      <div class="backend-header">
+        <label for="backend-url"><strong>Backend Server</strong></label>
+        <span id="backend-status-badge" class="badge badge-offline">Checking...</span>
+      </div>
+      <div class="backend-input-row">
+        <input type="text" id="backend-url" class="form-input" value="http://localhost:8000">
+        <button id="check-backend-btn" class="btn btn-secondary">Test</button>
+      </div>
+      <div id="backend-details" class="backend-details"></div>
+    </div>
+
+    <div class="popup-section flashcards-section">
+      <div class="backend-header">
+        <label><strong>Saved Flashcards</strong></label>
+        <span id="flashcard-count-badge" class="badge badge-online">0 saved</span>
+      </div>
+      <div class="subtext">Saved permanently on disk (CSV). Ready for Wortlaut or Anki:</div>
+      <div style="display: flex; gap: 8px; margin-top: 8px;">
+        <button id="download-csv-btn" class="btn btn-primary" style="flex: 1; font-size: 12px; padding: 6px 10px;">
+          📥 Download CSV (for Wortlaut & Anki)
+        </button>
+        <button id="clear-flashcards-btn" class="btn btn-secondary" style="font-size: 12px; padding: 6px 10px;" title="Clear saved cards from file">
+          🗑
+        </button>
+      </div>
+      <div style="font-size: 11px; margin-top: 6px; color: #94a3b8;">
+        Auto-saved to: <code>backend/data/saved_flashcards.csv</code>
+      </div>
+    </div>
+
+    <div class="popup-footer">
+      <button id="open-test-page-btn" class="btn btn-primary btn-block">Open Local Test Page</button>
+    </div>
+  </div>
+
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

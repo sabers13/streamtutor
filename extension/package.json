@@ -1,0 +1,20 @@
+{
+  "name": "german-stream-tutor-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome Extension for learning German while watching Naruto on Amazon Prime Video",
+  "type": "module",
+  "scripts": {
+    "dev": "node build.js --watch",
+    "build": "node build.js",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11",
+    "vitest": "^1.6.0"
+  }
+}
