@@ -77,6 +77,18 @@ pip install -r requirements.txt
 uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
 ```
 
+#### Linux: Start automatically at login
+
+On a Linux desktop that uses systemd, install the included user service from the project root:
+
+```bash
+./scripts/install-user-service.sh
+```
+
+The installer prepares the Python environment if needed, starts the backend now, and enables it for future logins. The service restarts automatically if the backend crashes. You can check it with `systemctl --user status streamtutor-backend.service` or open `http://127.0.0.1:8000/health`. It listens only on your computer.
+
+To stop it for the current session, run `systemctl --user stop streamtutor-backend.service`. To turn off automatic startup, run `systemctl --user disable --now streamtutor-backend.service`.
+
 ---
 
 ### 2. Installing the Chrome Extension

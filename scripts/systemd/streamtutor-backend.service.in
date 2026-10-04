@@ -1,0 +1,12 @@
+[Unit]
+Description=StreamTutor local backend
+
+[Service]
+Type=simple
+WorkingDirectory=@BACKEND_DIR@
+ExecStart="@UVICORN@" app.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=default.target
